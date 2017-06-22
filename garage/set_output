@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+# Set GPIO Output Script
+
+import RPi.GPIO as GPIO
+import sys
+import datetime
+
+GPIO.setwarnings(False)
+
+output_pin_1 = 17
+output_pin_2 = 18
+	
+if len(sys.argv) == 3:
+	GPIO.setmode(GPIO.BCM)
+	
+	pin = int(sys.argv[1])
+	state = True if int(sys.argv[2]) > 0 else False
+	input_pin = -1
+	
+	if pin == 1:
+		input_pin = output_pin_1
+	elif pin == 2:
+		input_pin = output_pin_2
+	else:
+		print("Unknown pin: " + str(pin))
+		quit()
+	
+	print("Pin " + str(input_pin) + " set to " + str(state))
+	
+	GPIO.setup(input_pin, GPIO.OUT)
+	GPIO.output(input_pin, not state)
+else:
+	print("You gave " + str(len(sys.argv)) + " arguments.")
+	print("Must give two arguments: output number and state. Example: ./set_output 1 0")
+
+
+f = open("/home/pi/set_output.log", "a")
+f.write(str(datetime.datetime.now()) + "\n")
+f.close()

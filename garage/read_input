@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+# Python GPIO test script
+import RPi.GPIO as GPIO
+import time
+
+pin = 27
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+input = GPIO.input(pin)
+if input:
+	print("DOOR_OPEN")
+else:
+	print("DOOR_CLOSED")

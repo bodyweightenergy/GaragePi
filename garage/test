@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+# Test Script for PHP execution
+import RPi.GPIO as GPIO
+
+print("Hello world!")
